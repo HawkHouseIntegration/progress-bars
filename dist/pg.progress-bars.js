@@ -1,4 +1,4 @@
-/*! pg.progress-bars v0.2.1 | Pavel Grinchenko <psdcoder@gmail.com> | (c) 2015 */
+/*! pg.progress-bars v0.2.1 | Pavel Grinchenko <psdcoder@gmail.com> | (c) 2016 */
 angular.module('pg.progress-bars', []);
 
 (function () {
@@ -272,6 +272,10 @@ angular.module('pg.progress-bars', []);
         var progressBars = {};
 
         this._register = function (progressBar) {
+            if (progressBars[progressBar.name] && progressBars[progressBar.name].dummy) {
+                progressBars[progressBar.name].apply(progressBar);
+            }
+
             progressBars[progressBar.name] = progressBar;
         };
 
@@ -283,10 +287,39 @@ angular.module('pg.progress-bars', []);
 
         this.get = function(name) {
             if (!progressBars[name]) {
-                return null;
+                progressBars[name] = new ProgressBarDummy();
             }
 
             return progressBars[name];
         };
+    }
+
+    function ProgressBarDummy() {
+        var started = false;
+        var _progressBar = undefined;
+
+        this.dummy = true;
+
+        this.start = function () {
+            started = true;
+            if (_progressBar) {
+                _progressBar.start();
+            }
+        }
+
+        this.done = function () {
+            started = false;
+            if (_progressBar) {
+                _progressBar.done();
+            }
+        }
+
+        this.apply = function (progressBar) {
+            if (started) {
+                progressBar.start();
+            }
+
+            _progressBar = progressBar;
+        }
     }
 })();
