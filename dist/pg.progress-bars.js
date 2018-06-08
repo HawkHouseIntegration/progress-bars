@@ -1,9 +1,10 @@
-/*! pg.progress-bars v0.2.1 | Pavel Grinchenko <psdcoder@gmail.com> | (c) 2016 */
+/*! pg.progress-bars v0.2.2 | Pavel Grinchenko <psdcoder@gmail.com> | (c) 2018 */
 angular.module('pg.progress-bars', []);
 
 (function () {
     'use strict';
 
+    progressBarDirective.$inject = ["ProgressBarsSettings", "ProgressBarsStorage", "ProgressBarFactory"];
     angular
         .module('pg.progress-bars')
         .directive('pgProgressBar', progressBarDirective);
@@ -58,7 +59,6 @@ angular.module('pg.progress-bars', []);
             }
         };
     }
-    progressBarDirective.$inject = ["ProgressBarsSettings", "ProgressBarsStorage", "ProgressBarFactory"];
 })();
 
 (function () {

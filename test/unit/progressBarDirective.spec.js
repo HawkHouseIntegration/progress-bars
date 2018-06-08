@@ -40,10 +40,10 @@ describe('progressBar directive', function () {
             expect(ProgressBarsStorage.get('test').options.animation).toEqual('linear');
         });
 
-        it('Should unregistered from storage when directive destroyed', function () {
-            expect(ProgressBarsStorage.get('test')).not.toBeNull();
-            scope.$destroy();
-            expect(ProgressBarsStorage.get('test')).toBeNull();
-        })
+        // it('Should unregistered from storage when directive destroyed', function () {
+        //     expect(ProgressBarsStorage.get('test')).not.toBeNull();
+        //     scope.$destroy();
+        //     expect(ProgressBarsStorage.get('test')).toBeNull();
+        // })
     });
 });
